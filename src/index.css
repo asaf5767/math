@@ -1,0 +1,370 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════
+   🏰 HOGWARTS MATH ACADEMY — Master Styles
+   RTL Hebrew + LTR Math + Magical Theme
+   ═══════════════════════════════════════════ */
+
+@theme {
+  --color-hp-deepPurple: #1a0a2e;
+  --color-hp-royalPurple: #2d1b69;
+  --color-hp-midnightBlue: #0d1b3e;
+  --color-hp-gold: #d4a843;
+  --color-hp-warmGold: #f5c542;
+  --color-hp-parchment: #f5e6c8;
+  --color-hp-cream: #fdf8ef;
+  --color-hp-gryffindorRed: #7b2d3f;
+  --color-hp-scarlet: #ae0001;
+  --color-hp-spellGlow: #7eb8ff;
+  --color-hp-emerald: #1a5c3a;
+  --color-hp-potionPurple: #8b5cf6;
+  --color-hp-stone: #4a4458;
+  --color-hp-shadow: #0a0612;
+
+  --font-display: 'Amatic SC', cursive;
+  --font-body: 'Heebo', sans-serif;
+}
+
+/* ═══════════════════════════════════════════
+   Global RTL + Base
+   ═══════════════════════════════════════════ */
+
+html {
+  direction: rtl;
+  font-family: var(--font-body);
+  background: var(--color-hp-deepPurple);
+  color: var(--color-hp-parchment);
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+}
+
+/* Math expressions MUST be LTR inside RTL context */
+.math-expr {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  font-family: 'Heebo', monospace;
+}
+
+/* Number pad is always LTR */
+.number-pad {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* ═══════════════════════════════════════════
+   Magical Background Layers
+   ═══════════════════════════════════════════ */
+
+.hogwarts-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(45, 27, 105, 0.8) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(13, 27, 62, 0.6) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 100%, rgba(123, 45, 63, 0.3) 0%, transparent 40%),
+    linear-gradient(180deg, #0a0612 0%, #1a0a2e 40%, #2d1b69 100%);
+}
+
+/* Floating Stars */
+.hogwarts-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 10% 15%, rgba(212, 168, 67, 0.8), transparent),
+    radial-gradient(2px 2px at 25% 35%, rgba(212, 168, 67, 0.5), transparent),
+    radial-gradient(1px 1px at 40% 10%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 55% 45%, rgba(212, 168, 67, 0.7), transparent),
+    radial-gradient(1px 1px at 70% 20%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(2px 2px at 85% 55%, rgba(212, 168, 67, 0.6), transparent),
+    radial-gradient(1px 1px at 15% 65%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(2px 2px at 45% 75%, rgba(212, 168, 67, 0.5), transparent),
+    radial-gradient(1px 1px at 75% 85%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 90% 30%, rgba(212, 168, 67, 0.4), transparent),
+    radial-gradient(1px 1px at 30% 90%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(2px 2px at 60% 60%, rgba(212, 168, 67, 0.3), transparent);
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* ═══════════════════════════════════════════
+   Floating Candles
+   ═══════════════════════════════════════════ */
+
+.floating-candle {
+  position: fixed;
+  width: 6px;
+  height: 40px;
+  background: linear-gradient(to top, #f5e6c8 0%, #f5c542 60%, #d4a843 100%);
+  border-radius: 2px 2px 4px 4px;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.floating-candle::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 14px;
+  background: radial-gradient(ellipse, #f5c542 0%, #d4a843 40%, transparent 70%);
+  border-radius: 50% 50% 20% 20%;
+  animation: flicker 2s ease-in-out infinite alternate;
+}
+
+.floating-candle::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(245, 197, 66, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+  25% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+  50% { opacity: 0.7; transform: translateX(-50%) scale(0.95); }
+  75% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+  100% { opacity: 0.85; transform: translateX(-50%) scale(1); }
+}
+
+@keyframes floatCandle {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ═══════════════════════════════════════════
+   Parchment Card
+   ═══════════════════════════════════════════ */
+
+.parchment-card {
+  background:
+    linear-gradient(135deg, rgba(245, 230, 200, 0.95) 0%, rgba(253, 248, 239, 0.9) 50%, rgba(245, 230, 200, 0.95) 100%);
+  border: 2px solid rgba(212, 168, 67, 0.4);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 24px rgba(10, 6, 18, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 60px rgba(212, 168, 67, 0.1);
+  color: #2d1b69;
+  position: relative;
+  overflow: hidden;
+}
+
+.parchment-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(212, 168, 67, 0.03) 2px,
+      rgba(212, 168, 67, 0.03) 4px
+    );
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   Golden Glow Button
+   ═══════════════════════════════════════════ */
+
+.magic-button {
+  background: linear-gradient(135deg, #7b2d3f 0%, #ae0001 100%);
+  color: #f5e6c8;
+  border: 2px solid rgba(212, 168, 67, 0.5);
+  border-radius: 12px;
+  padding: 14px 32px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(123, 45, 63, 0.4);
+  min-height: 48px;
+}
+
+.magic-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 24px rgba(123, 45, 63, 0.5),
+    0 0 30px rgba(212, 168, 67, 0.2);
+  border-color: rgba(212, 168, 67, 0.8);
+}
+
+.magic-button:active {
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════
+   Spell Glow Effect
+   ═══════════════════════════════════════════ */
+
+@keyframes spellGlow {
+  0% { box-shadow: 0 0 5px rgba(126, 184, 255, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(126, 184, 255, 0.6), 0 0 60px rgba(126, 184, 255, 0.2); }
+  100% { box-shadow: 0 0 5px rgba(126, 184, 255, 0.3); }
+}
+
+.spell-glow {
+  animation: spellGlow 2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════
+   Gold Sparkle Burst (correct answer)
+   ═══════════════════════════════════════════ */
+
+@keyframes sparkle-burst {
+  0% { transform: scale(0) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.5) rotate(180deg); opacity: 0.8; }
+  100% { transform: scale(2) rotate(360deg); opacity: 0; }
+}
+
+.sparkle-burst {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #f5c542 0%, #d4a843 40%, transparent 70%);
+  border-radius: 50%;
+  animation: sparkle-burst 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   Wand Cursor Trail
+   ═══════════════════════════════════════════ */
+
+.wand-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: #f5c542;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 6px #f5c542, 0 0 12px rgba(212, 168, 67, 0.5);
+  animation: particle-fade 0.6s ease-out forwards;
+}
+
+@keyframes particle-fade {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.2); }
+}
+
+/* ═══════════════════════════════════════════
+   Title Typography (Magical Hebrew)
+   ═══════════════════════════════════════════ */
+
+.magic-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-hp-gold);
+  text-shadow:
+    0 0 10px rgba(212, 168, 67, 0.5),
+    0 2px 4px rgba(10, 6, 18, 0.5);
+  letter-spacing: 0.05em;
+}
+
+/* Progress bar fills RTL */
+.progress-fill-rtl {
+  transform-origin: right;
+}
+
+/* ═══════════════════════════════════════════
+   Number Pad Buttons
+   ═══════════════════════════════════════════ */
+
+.numpad-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(45, 27, 105, 0.9) 0%, rgba(26, 10, 46, 0.95) 100%);
+  border: 2px solid rgba(212, 168, 67, 0.3);
+  color: var(--color-hp-parchment);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.numpad-btn:hover {
+  border-color: rgba(212, 168, 67, 0.7);
+  background: linear-gradient(135deg, rgba(45, 27, 105, 1) 0%, rgba(74, 68, 88, 0.95) 100%);
+  transform: scale(1.05);
+}
+
+.numpad-btn:active {
+  transform: scale(0.95);
+  border-color: var(--color-hp-gold);
+  box-shadow: 0 0 20px rgba(212, 168, 67, 0.3);
+}
+
+/* ═══════════════════════════════════════════
+   Star Rating
+   ═══════════════════════════════════════════ */
+
+.star-earned {
+  color: #f5c542;
+  filter: drop-shadow(0 0 4px rgba(245, 197, 66, 0.6));
+}
+
+.star-empty {
+  color: rgba(74, 68, 88, 0.5);
+}
+
+/* ═══════════════════════════════════════════
+   Level Lock Overlay
+   ═══════════════════════════════════════════ */
+
+.level-locked {
+  filter: grayscale(0.7) brightness(0.5);
+  cursor: not-allowed;
+}
+
+/* ═══════════════════════════════════════════
+   Responsive (tablet-first for 7yo)
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .numpad-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .numpad-btn {
+    width: 80px;
+    height: 80px;
+    font-size: 1.7rem;
+  }
+}
